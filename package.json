@@ -1,0 +1,26 @@
+{
+  "name": "node-pom-parser",
+  "version": "0.1.0",
+  "description": "The XML parser for pom.xml that is lighting fast",
+  "main": "src/",
+  "scripts": {
+    "test": "node test/"
+  },
+  "dependencies": {
+    "node-expat": "^2.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:marcellodesales/node-pom-parser.git"
+  },
+  "keywords": [
+    "XML",
+    "expat",
+    "java",
+    "pom",
+    "pom.xml",
+    "parser"
+  ],
+  "author": "Marcello de Sales <marcello.desales@gmail.com>",
+  "license": "MIT"
+}
