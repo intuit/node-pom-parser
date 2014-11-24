@@ -1,6 +1,6 @@
 {
   "name": "node-pom-parser",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The XML parser for pom.xml that is lighting fast",
   "main": "src/",
   "scripts": {
