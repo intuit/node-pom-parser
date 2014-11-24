@@ -2,9 +2,9 @@
 
 "use strict";
 
-var expat = require("node-expat");
-var parser = new expat.Parser("UTF-8");
 var fs = require("fs");
+var sax = require("../lib/sax_parser.js");
+var expat = require("../lib/expat_parser.js");
 
 /**
  * Load xml file contents using the sync mode.
@@ -47,47 +47,24 @@ module.exports.parsePom = function(opt) {
   }
 
   // Use or load the content from the filePath
-  var pom = this.loadXmlFileContents(opt);
+  var pom = { timers: { load: 0, parse: 0 } }
+  if (!opt.xmlContent) {
+    pom = this.loadXmlFileContents(opt);
+  }
 
-  // In case of error, just abort fast
-  parser.on("error", function(error) {
-    pom.err = error;
-    parser.destroy();
-  });
+  var loadTimer = pom.timers;
 
-  // Parsing the elements from the pom.xml
-  parser.on("startElement", function(startName, attrs) {
-    if (startName === "project") {
-      parser.on("startElement", function(startName, attrs) {
-        // Whenever a value has been assigned, never replace it
-        if (startName === "groupId") {
-          parser.on("text", function(text) {
-            pom.groupId = pom.groupId || text;
-          });
-
-        } else if (startName === "artifactId") {
-          parser.on("text", function(text) {
-            pom.artifactId = pom.artifactId || text;
-          });
-
-        } else if (startName === "version") {
-          parser.on("text", function(text) {
-            pom.version = pom.version || text;
-            // Done here! So quit fast!
-            parser.destroy();
-          });
-        }
-      });
-    }
-  });
-
-  // Compute the time to parse the xml content
+  // parse the pom, erasing all
   var parsePomStart = process.hrtime();
-  parser.parse(pom.xmlContent);
-  var parsePomTime = process.hrtime(parsePomStart);
-  delete pom.xmlContent;
+  pom = sax.parse(pom.xmlContent);
+  //pom = expat.parse(pom.xmlContent); // EXTREMELY FASTER, BUT BROKEN!
 
+  pom.timers = {};
+  var parsePomTime = process.hrtime(parsePomStart);
   pom.timers.parse = (parsePomTime[1] / 1000000) + "ms";
+
+  // Update the ref to the timer
+  pom.timers.load = loadTimer.load;
 
   // Depending on the requested format, format it or not.
   return opt.format === "json" ? pom : (pom.groupId + ":" + pom.artifactId + ":" + pom.version);
