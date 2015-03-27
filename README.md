@@ -1,7 +1,7 @@
 Node.js pom.xml Parser
 =======
 
-[![Build Status](https://travis-ci.org/marcellodesales/node-pom-parser.svg?branch=0.1.0)](https://travis-ci.org/marcellodesales/node-pom-parser)
+[![Build Status](https://travis-ci.org/marcellodesales/node-pom-parser.svg)](https://travis-ci.org/marcellodesales/node-pom-parser)
 
 Parsing Java's pom.xml with an extremely fast XML EXPAT parser.
 
