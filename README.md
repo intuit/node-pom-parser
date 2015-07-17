@@ -1,7 +1,7 @@
 Node.js pom.xml Parser
 =======
 
-[![Build Status](https://travis-ci.org/marcellodesales/node-pom-parser.svg)](https://travis-ci.org/marcellodesales/node-pom-parser) [![License](https://img.shields.io/badge/license-MIT-lightgray.svg)]
+[![Build Status](https://travis-ci.org/marcellodesales/node-pom-parser.svg)](https://travis-ci.org/marcellodesales/node-pom-parser) ![License](https://img.shields.io/badge/license-MIT-lightgray.svg)
 
 Parsing Java's pom.xml and properly returning the json object, including attributes and values.
 
