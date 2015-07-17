@@ -1,14 +1,14 @@
 {
-  "name": "node-pom-parser",
-  "version": "0.1.1",
-  "description": "The XML parser for pom.xml that is lighting fast",
-  "main": "src/",
+  "name": "pom-parser",
+  "version": "1.0.0",
+  "description": "A parser for the Java/Maven pom.xml files.",
+  "main": "lib/",
   "scripts": {
-    "test": "node test/"
+    "test": "mocha test/ --reporter spec"
   },
   "dependencies": {
-    "ltx": "^0.7.0",
-    "node-expat": "^2.3.2"
+    "traverse": "^0.6.6",
+    "xml2js": "^0.4.9"
   },
   "repository": {
     "type": "git",
@@ -16,12 +16,18 @@
   },
   "keywords": [
     "XML",
-    "expat",
     "java",
     "pom",
     "pom.xml",
-    "parser"
+    "parser",
+    "maven",
+    "xml2js"
   ],
-  "author": "Marcello de Sales <marcello.desales@gmail.com>",
-  "license": "MIT"
+  "author": "Marcello de Sales <marcello_desales@intuit.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "mocha": "^2.2.5",
+    "sinon": "^1.15.4"
+  }
 }

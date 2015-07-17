@@ -1,9 +1,39 @@
-var ext = require("../src");
+var pomParser = require("../lib");
+var expect = require('chai').expect
 
-var pom = ext.parsePom({ filePath: __dirname + "/pom.xml"});
+var POM_PATH = __dirname + "/fixture/pom.xml";
 
-console.log(pom);
+describe('require("pom-parser")', function () {
 
-var pom2 = ext.parsePom({ filePath: __dirname + "/pom2.xml", format: "text"});
+  describe('loading from files', function() {
+    var pomResponse = null;
+    var pom = null;
 
-console.log(pom2);
+    before(function() {
+      pomParser.parse({filePath: POM_PATH}, function(err, response) {
+        expect(err).to.be.null;
+        expect(response).to.be.an("object");
+
+	pomResponse = response;
+	pom = pomResponse.pomObject;
+      });
+ 
+    });	  
+
+    it('can load any pom.xml properly', function () {
+      expect(pomResponse.pomXml).to.be.an("string");
+      expect(pomResponse.pomObject).to.be.an("object");
+    });
+
+    it('parses xml attributes as properties', function () {
+      expect(pom.project.xmlns).to.equal("http://maven.apache.org/POM/4.0.0");
+      expect(pom.project["xmlns:xsi"]).to.equal("http://www.w3.org/2001/XMLSchema-instance"); 
+    });
+
+    it('parses xml elements as properties', function () {
+      expect(pom.project.parent).to.be.an("object");
+      expect(pom.project.parent.artifactid).to.equal("tynamo-parent");
+    });
+
+  });
+});
