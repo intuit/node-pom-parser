@@ -1,9 +1,11 @@
 Node.js pom.xml Parser
 =======
 
-[![Build Status](https://travis-ci.org/marcellodesales/node-pom-parser.svg)](https://travis-ci.org/marcellodesales/node-pom-parser) ![License](https://img.shields.io/badge/license-MIT-lightgray.svg)
+[![Build Status](https://travis-ci.org/marcellodesales/node-pom-parser.svg)](https://travis-ci.org/marcellodesales/node-pom-parser) ![License](https://img.shields.io/badge/license-MIT-lightgray.svg) [![npm version](https://badge.fury.io/js/pom-parser.svg)](http://badge.fury.io/js/pom-parser) [![Dependency Status](https://gemnasium.com/marcellodesales/node-pom-parser.svg)](https://gemnasium.com/marcellodesales/node-pom-parser)
 
 Parsing Java's pom.xml and properly returning the json object, including attributes and values.
+
+[![NPM](https://nodei.co/npm/pom-parser.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/pom-parser/)
 
 Installation
 ======
