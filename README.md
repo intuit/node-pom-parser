@@ -45,7 +45,6 @@ pomParser.parse(opts, function(err, pomResponse) {
   console.log("OBJECT: " + JSON.stringify(pomResponse.pomObject));
 });
 ```
-
 It should print the follow object with the following properties:
 
 * '_' represents the text value of an element with attributes and text values.
