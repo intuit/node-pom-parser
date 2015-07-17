@@ -8,6 +8,7 @@ describe('require("pom-parser")', function () {
   describe('loading from files', function() {
     var pomResponse = null;
     var pom = null;
+    var xml = null;
 
     before(function() {
       pomParser.parse({filePath: POM_PATH}, function(err, response) {
@@ -16,9 +17,17 @@ describe('require("pom-parser")', function () {
 
 	pomResponse = response;
 	pom = pomResponse.pomObject;
+        xml = pomResponse.pomXml;
       });
  
-    });	  
+    });
+
+   after(function() {
+     console.log("\n\nThe XML loaded");
+     console.log(xml);
+     console.log("\n\nThe parsed XML");
+     console.log(JSON.stringify(pom, null, 2));
+   });
 
     it('can load any pom.xml properly', function () {
       expect(pomResponse.pomXml).to.be.an("string");
