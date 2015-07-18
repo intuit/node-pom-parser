@@ -1,25 +1,35 @@
 var pomParser = require("../lib");
 var expect = require('chai').expect
 
-var POM_PATH = __dirname + "/fixture/pom.xml";
+var POM_CONTENT = '<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"' +
+  '    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">' +
+  '  <parent>' +
+  '    <artifactId>tynamo-parent</artifactId>' +
+  '    <groupId>org.tynamo</groupId>' +
+  '    <version>0.0.9</version>' +
+  '  </parent>' +
+  '  <modelVersion parallel="now">4.0.0</modelVersion>'+
+  '  <groupId>org.tynamo.examples</groupId>' +
+  '  <artifactId>tynamo-example-federatedaccounts</artifactId>' +
+  '  <version>0.0.1-SNAPSHOT</version>' +
+  '  <packaging>war</packaging>' +
+  '  <name>Tynamo Example - Federated Accounts</name>' +
+  '</project>';
 
-describe('require("pom-parser")', function () {
+describe('require("pom-parser") using xml content', function () {
 
-  describe('loading from files', function() {
+  describe('loading from strings', function() {
     var pomResponse = null;
     var pom = null;
-    var xml = null;
 
     // Setup the tests using mocha's promise.
-    // https://lostechies.com/derickbailey/2012/08/17/asynchronous-unit-tests-with-mocha-promises-and-winjs/
     before(function(done) {
-      pomParser.parse({filePath: POM_PATH}, function(err, response) {
+      pomParser.parse({xmlContent: POM_CONTENT}, function(err, response) {
         expect(err).to.be.null;
         expect(response).to.be.an("object");
 
 	pomResponse = response;
 	pom = pomResponse.pomObject;
-	xml = pomResponse.pomXml;
 	done();
       });
     });
@@ -27,14 +37,13 @@ describe('require("pom-parser")', function () {
     // Tear down the tests by printing the loaded xml and the parsed object.
     after(function(done) {
       console.log("\n\nThe XML loaded");
-      console.log(xml);
+      console.log(POM_CONTENT);
       console.log("\n\nThe parsed XML");
       console.log(JSON.stringify(pom, null, 2));
       done();
     });
  
-    it('can load any pom.xml properly', function(done) {
-      expect(pomResponse.pomXml).to.be.an("string");
+    it('can parse any pom xml in strings properly', function(done) {
       expect(pomResponse.pomObject).to.be.an("object");
       done();
     });
