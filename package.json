@@ -7,6 +7,7 @@
     "test": "mocha test/ --reporter spec"
   },
   "dependencies": {
+    "bluebird": "^2.9.34",
     "traverse": "^0.6.6",
     "xml2js": "^0.4.9"
   },
