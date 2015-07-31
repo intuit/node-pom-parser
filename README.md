@@ -7,6 +7,14 @@ Parsing Java's pom.xml and properly returning the json object, including attribu
 
 [![NPM](https://nodei.co/npm/pom-parser.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/pom-parser/)
 
+Motivation
+========
+
+* Your enterprise decided to move production code written in Java to Node.js
+* Your enterprise uses a centralized Nexus repository where your Java project uses pom.xml to manage app packaging.
+* Your enterprise still plans to use Nexus repository to package Node.js applications.
+* Your enterprise engineers want an API to retrieve information from the pom.xml file from those Node.js apps.
+
 Installation
 ======
 
