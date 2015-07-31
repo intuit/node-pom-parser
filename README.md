@@ -2,6 +2,7 @@ Node.js pom.xml Parser
 =======
 
 [![Build Status](https://travis-ci.org/marcellodesales/node-pom-parser.svg)](https://travis-ci.org/marcellodesales/node-pom-parser) ![License](https://img.shields.io/badge/license-MIT-lightgray.svg) [![npm version](https://badge.fury.io/js/pom-parser.svg)](http://badge.fury.io/js/pom-parser) [![Dependency Status](https://gemnasium.com/marcellodesales/node-pom-parser.svg)](https://gemnasium.com/marcellodesales/node-pom-parser) [![Codacy Badge](https://www.codacy.com/project/badge/06c82199c0ee44aaa56b723bd4ef6a08)](https://www.codacy.com/app/marcello-desales/node-pom-parser)
+[![Coverage Status](https://coveralls.io/repos/marcellodesales/node-pom-parser/badge.svg?branch=develop&service=github)](https://coveralls.io/github/marcellodesales/node-pom-parser?branch=develop)
 
 Parsing Java's pom.xml and properly returning the json object, including attributes and values.
 
