@@ -2,7 +2,13 @@
   "name": "pom-parser",
   "version": "1.1.0",
   "description": "A parser for the Java/Maven pom.xml files.",
+  "license": "MIT",
   "main": "lib/",
+  "author": {
+    "name": "Marcello de Sales",
+    "email": "Marcello_deSales@intuit.com",
+    "url": "https://about.me/marcellodesales"
+  },
   "scripts": {
     "test": "mocha test/ --reporter spec"
   },
