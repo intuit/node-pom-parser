@@ -1,7 +1,7 @@
 Node.js pom.xml Parser
 =======
 
-[![Build Status](https://travis-ci.org/intuit/node-pom-parser.svg)](https://travis-ci.org/intuit/node-pom-parser.svg) ![License](https://img.shields.io/badge/license-MIT-lightgray.svg) [![npm version](https://badge.fury.io/js/pom-parser.svg)](http://badge.fury.io/js/pom-parser) [![Dependency Status](https://gemnasium.com/marcellodesales/node-pom-parser.svg)](https://gemnasium.com/marcellodesales/node-pom-parser) [![Codacy Badge](https://www.codacy.com/project/badge/191cac4deb214c1ebca93924bfd2ef4b)](https://www.codacy.com/app/marcello-desales/node-pom-parser)
+[![Build Status](https://travis-ci.org/intuit/node-pom-parser.svg)](https://travis-ci.org/intuit/node-pom-parser.svg) ![License](https://img.shields.io/badge/license-MIT-lightgray.svg) [![npm version](https://badge.fury.io/js/pom-parser.svg)](http://badge.fury.io/js/pom-parser) [![Dependency Status](https://gemnasium.com/intuit/node-pom-parser.svg)](https://gemnasium.com/intuit/node-pom-parser) [![Codacy Badge](https://www.codacy.com/project/badge/191cac4deb214c1ebca93924bfd2ef4b)](https://www.codacy.com/app/marcello-desales/node-pom-parser)
 [![Coverage Status](https://coveralls.io/repos/intuit/node-pom-parser/badge.svg?branch=master&service=github)](https://coveralls.io/github/intuit/node-pom-parser?branch=master)
 
 Parsing Java's pom.xml and properly returning the json object, including attributes and values.
