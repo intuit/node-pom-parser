@@ -64,4 +64,14 @@ describe('require("pom-parser")', function () {
     });
   });
 
+  describe('when opts is empty', function(){
+    it('parser should throw an error', function(){
+
+      assert.throws(function(){ pomParser.parse({}, function(err, response){
+
+      }, Error);
+    })
+    });
+  });
+
 });
