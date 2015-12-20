@@ -1,5 +1,6 @@
 var pomParser = require("../lib");
-var expect = require('chai').expect
+var expect = require('chai').expect;
+var assert = require('assert');
 
 var POM_PATH = __dirname + "/fixture/pom.xml";
 
@@ -52,4 +53,15 @@ describe('require("pom-parser")', function () {
     });
 
   });
+
+  describe('when opts is null', function(){
+    it('parser should throw an error', function(){
+
+      assert.throws(function(){ pomParser.parse(null, function(err, response){
+
+      }, Error);
+    })
+    });
+  });
+
 });
