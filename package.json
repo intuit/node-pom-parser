@@ -1,6 +1,6 @@
 {
   "name": "pom-parser",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A parser for the Java/Maven pom.xml files.",
   "license": "MIT",
   "main": "lib/",
@@ -10,25 +10,25 @@
     "url": "https://about.me/marcellodesales"
   },
   "scripts": {
-    "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "test": "nyc --reporter=html --reporter=text ./node_modules/mocha/bin/_mocha",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
-    "bluebird": "^2.9.34",
+    "bluebird": "^3.5.3",
     "traverse": "^0.6.6",
-    "xml2js": "^0.4.9"
+    "xml2js": "^0.4.19"
   },
   "devDependencies": {
-    "chai": "^3.0.0",
-    "codacy-coverage": "^1.1.2",
-    "coveralls": "^2.11.3",
-    "istanbul": "^0.3.17",
-    "mocha": "^2.2.5",
-    "mocha-lcov-reporter": "0.0.2",
-    "sinon": "^1.15.4"
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.3",
+    "mocha": "^6.0.2",
+    "mocha-lcov-reporter": "1.3.0",
+    "nyc": "^13.3.0",
+    "sinon": "^7.3.1"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:marcellodesales/node-pom-parser.git"
+    "url": "git@github.com:intuit/node-pom-parser.git"
   },
   "keywords": [
     "java",
