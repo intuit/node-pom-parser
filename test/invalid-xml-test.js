@@ -22,4 +22,3 @@ describe('require("pom-parser")', function () {
     });
   });
 });
-``
