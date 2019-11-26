@@ -1,28 +1,19 @@
-Node.js pom.xml Parser
-=======
+# Node.js pom.xml Parser
 
-[![Build Status](https://travis-ci.org/intuit/node-pom-parser.svg)](https://travis-ci.org/intuit/node-pom-parser) [![npm version](https://badge.fury.io/js/pom-parser.svg)](http://badge.fury.io/js/pom-parser) [![Dependency Status](https://gemnasium.com/intuit/node-pom-parser.svg)](https://gemnasium.com/intuit/node-pom-parser) [![Codacy Badge](https://www.codacy.com/project/badge/191cac4deb214c1ebca93924bfd2ef4b)](https://www.codacy.com/app/marcello-desales/node-pom-parser) [![Coverage Status](https://coveralls.io/repos/intuit/node-pom-parser/badge.svg?branch=master&service=github)](https://coveralls.io/github/intuit/node-pom-parser?branch=master) ![License](https://img.shields.io/badge/license-MIT-lightgray.svg) 
+[![Build Status](https://travis-ci.org/intuit/node-pom-parser.svg)](https://travis-ci.org/intuit/node-pom-parser) [![npm version](https://badge.fury.io/js/pom-parser.svg)](http://badge.fury.io/js/pom-parser) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d2906fe328124c138cd1e2de472d9245)](https://www.codacy.com/manual/marcellodesales/node-pom-parser?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=intuit/node-pom-parser/&amp;utm_campaign=Badge_Grade) [![Coverage Status](https://coveralls.io/repos/intuit/node-pom-parser/badge.svg?branch=master&service=github)](https://coveralls.io/github/intuit/node-pom-parser?branch=master) ![License](https://img.shields.io/badge/license-MIT-lightgray.svg) 
 
 Parsing Java's pom.xml and properly returning the json object, including attributes and values.
 
 [![NPM](https://nodei.co/npm/pom-parser.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/pom-parser/)
 
-Motivation
-========
+# Motivation
 
 * Your enterprise decided to move production code written in Java to Node.js
 * Your enterprise uses a centralized Nexus repository where your Java project uses pom.xml to manage app packaging.
 * Your enterprise still plans to use Nexus repository to package Node.js applications.
 * Your enterprise engineers want an API to retrieve information from the pom.xml file from those Node.js apps.
 
-Installation
-======
-
-```
-npm install --save pom-parser
-```
-Features
-======
+# Features
 
 * Reads any pom.xml.
 * All xml elements are placed into properties.
@@ -30,8 +21,13 @@ Features
 * Both the xml string and the parsed object are returned.
 * You can provide parsing options.
 
-Use
-=====
+# Installation
+
+```
+npm install --save pom-parser
+```
+
+# Use
 
 * Printing the object
 
@@ -195,8 +191,7 @@ It should print the follow object with the following properties:
 }
 ```
 
-License
-==========
+# License
 
 `node-pom-parser` is provided under the MIT license.
 
@@ -204,3 +199,6 @@ Contributing
 =======
 
 Pull requests are welcome!
+
+* Please send PRs to the `develop` branch for the next release!
+* Make sure to watch all the Github Actions status are passing!
