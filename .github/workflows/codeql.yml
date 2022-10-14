@@ -1,9 +1,12 @@
 name: CodeQL Analysis
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
   schedule:
-    - cron: '0 0 * * 1'
+    - cron: '0 2 * * 1'
 
 jobs:
   test:
