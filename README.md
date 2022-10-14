@@ -1,6 +1,10 @@
 # Node.js pom.xml Parser
 
-[![Build Status](https://travis-ci.org/intuit/node-pom-parser.svg)](https://travis-ci.org/intuit/node-pom-parser) [![npm version](https://badge.fury.io/js/pom-parser.svg)](http://badge.fury.io/js/pom-parser) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d2906fe328124c138cd1e2de472d9245)](https://www.codacy.com/manual/marcellodesales/node-pom-parser?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=intuit/node-pom-parser/&amp;utm_campaign=Badge_Grade) [![Coverage Status](https://coveralls.io/repos/intuit/node-pom-parser/badge.svg?branch=master&service=github)](https://coveralls.io/github/intuit/node-pom-parser?branch=master) ![License](https://img.shields.io/badge/license-MIT-lightgray.svg) 
+[![Build Status](https://travis-ci.org/intuit/node-pom-parser.svg)](https://travis-ci.org/intuit/node-pom-parser) 
+![npm](https://img.shields.io/npm/v/node-pom-parser)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d2906fe328124c138cd1e2de472d9245)](https://www.codacy.com/manual/marcellodesales/node-pom-parser?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=intuit/node-pom-parser/&amp;utm_campaign=Badge_Grade) 
+[![Coverage Status](https://coveralls.io/repos/intuit/node-pom-parser/badge.svg?branch=master&service=github)](https://coveralls.io/github/intuit/node-pom-parser?branch=master) 
+![License](https://img.shields.io/github/license/intuit/node-pom-parser)
 
 Parsing Java's pom.xml and properly returning the json object, including attributes and values.
 
