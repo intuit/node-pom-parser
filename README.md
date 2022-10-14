@@ -6,24 +6,36 @@
 [![Coverage Status](https://coveralls.io/repos/intuit/node-pom-parser/badge.svg?branch=master&service=github)](https://coveralls.io/github/intuit/node-pom-parser?branch=master) 
 ![License](https://img.shields.io/github/license/intuit/node-pom-parser)
 
-Parsing Java's pom.xml and properly returning the json object, including attributes and values.
-
 [![NPM](https://nodei.co/npm/pom-parser.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/pom-parser/)
+
+# pom-parser
+
+Parsing Java's `pom.xml` file and properly returning the JSON object, including all it's attributes and values.
 
 # Motivation
 
 * Your enterprise decided to move production code written in Java to Node.js
-* Your enterprise uses a centralized Nexus repository where your Java project uses pom.xml to manage app packaging.
-* Your enterprise still plans to use Nexus repository to package Node.js applications.
-* Your enterprise engineers want an API to retrieve information from the pom.xml file from those Node.js apps.
+* Your enterprise uses a centralized Nexus repository where your Java project uses pom.xml to manage app packaging
+* Your enterprise still plans to use Nexus repository to package Node.js applications
+* Your enterprise engineers want an API to retrieve information from the pom.xml file from those Node.js apps
 
 # Features
 
-* Reads any pom.xml.
-* All xml elements are placed into properties.
-* All xml element attributes are merged into the parent element.
-* Both the xml string and the parsed object are returned.
-* You can provide parsing options.
+* Reads any `pom.xml`
+* All XML elements are placed into properties
+* All XML element attributes are merged into the parent element
+* Both the XML string and the parsed object are returned
+* You can provide parsing options
+
+# Contributing
+
+Pull requests are welcome!
+
+* See if an issue is already open, if not open
+* Discuss with team to prevent duplicate effort
+* Work up the PR and add/update unit tests
+* Raise PR against the `master` branch for the next release
+* Ensure all the Github Actions/checks are passing
 
 # Installation
 
@@ -199,11 +211,3 @@ It should print the follow object with the following properties:
 # License
 
 `node-pom-parser` is provided under the MIT license.
-
-Contributing
-=======
-
-Pull requests are welcome!
-
-* Please send PRs to the `develop` branch for the next release!
-* Make sure to watch all the Github Actions status are passing!
