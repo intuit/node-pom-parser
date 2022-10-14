@@ -4,11 +4,18 @@
   "description": "A parser for the Java/Maven pom.xml files.",
   "license": "MIT",
   "main": "lib/",
-  "author": {
-    "name": "Marcello de Sales",
-    "email": "Marcello_deSales@intuit.com",
-    "url": "https://linkedin.com/in/marcellodesales"
-  },
+  "contributors": [
+    {
+      "name": "Niti Singhal",
+      "email": "niti_singhal@intuit.com",
+      "url": "https://nitisinghal.com"
+    },
+    {
+      "name": "Marcello de Sales",
+      "email": "Marcello_deSales@intuit.com",
+      "url": "https://linkedin.com/in/marcellodesales"
+    }
+  ],
   "scripts": {
     "test": "nyc mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
