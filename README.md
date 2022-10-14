@@ -1,6 +1,7 @@
 # Node.js pom.xml Parser
 
-[![Build Status](https://travis-ci.org/intuit/node-pom-parser.svg)](https://travis-ci.org/intuit/node-pom-parser) 
+[![CI Build Status](https://github.com/intuit/node-pom-parser/actions/workflows/unit-tests.yml/badge.svg?branch=master)](https://github.com/intuit/node-pom-parser/actions/workflows/unit-tests.yml)
+
 ![npm](https://img.shields.io/npm/v/node-pom-parser)
 [![CodeQL Analysis](https://github.com/intuit/node-pom-parser/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/intuit/node-pom-parser/actions/workflows/codeql.yml)
 [![Coverage Status](https://coveralls.io/repos/intuit/node-pom-parser/badge.svg?branch=master&service=github)](https://coveralls.io/github/intuit/node-pom-parser?branch=master) 
