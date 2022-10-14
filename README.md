@@ -27,8 +27,9 @@ Parsing Java's pom.xml and properly returning the json object, including attribu
 
 # Installation
 
-```
-npm install --save pom-parser
+```sh
+$ npm install --save node-pom-parser
+$ yarn add node-pom-parser
 ```
 
 # Use
