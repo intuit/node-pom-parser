@@ -17,11 +17,11 @@ describe('require("pom-parser")', function () {
       pomParser.parse({filePath: POM_PATH}, function(err, response) {
         expect(err).to.be.null;
         expect(response).to.be.an("object");
-
-	      pomResponse = response;
-	      pom = pomResponse.pomObject;
-	      xml = pomResponse.pomXml;
-	      done();
+        
+        pomResponse = response;
+        pom = pomResponse.pomObject;
+        xml = pomResponse.pomXml;
+        done();
       });
     });
 
