@@ -17,11 +17,11 @@ describe('require("pom-parser")', function () {
       pomParser.parse({filePath: POM_PATH}, function(err, response) {
         expect(err).to.be.null;
         expect(response).to.be.an("object");
-
-	pomResponse = response;
-	pom = pomResponse.pomObject;
-	xml = pomResponse.pomXml;
-	done();
+        
+        pomResponse = response;
+        pom = pomResponse.pomObject;
+        xml = pomResponse.pomXml;
+        done();
       });
     });
 
@@ -55,23 +55,44 @@ describe('require("pom-parser")', function () {
   });
 
   describe('when opts is null', function(){
-    it('parser should throw an error', function(){
-
-      assert.throws(function(){ pomParser.parse(null, function(err, response){
-
-      }, Error);
-    })
+    it('parser should throw an error', function() {
+      assert.throws(function(){
+        pomParser.parse(null, function(err, response){}, Error);
+      });
     });
   });
 
   describe('when opts is empty', function(){
     it('parser should throw an error', function(){
-
-      assert.throws(function(){ pomParser.parse({}, function(err, response){
-
-      }, Error);
-    })
+      assert.throws(function(){ 
+        pomParser.parse({}, function(err, response){}, Error);
+      });
     });
   });
 
+  describe('error scenarios', function() {
+    it('should return error if file does not exist', function(done) {
+      pomParser.parse({ filePath: __dirname + 'incorrect-file-path' }, function(err, response) {
+        expect(response).to.be.null;
+        expect(err).to.not.be.null;
+        done();
+      });
+    });
+
+    it('should return error if invalid xml file', function(done) {
+      pomParser.parse({ filePath: __dirname + '/fixture/pom2.xml' }, function(err, response) {
+        expect(response).to.be.null;
+        expect(err).to.not.be.null;
+        done();
+      });
+    });
+
+    it('should return error if invalid xml content', function(done) {
+      const invalidXml = '<parent>this is invalid</PARENT>';
+      pomParser.parse({ xmlContent: invalidXml }, function(err) {
+        expect(err).to.not.be.null;
+        done();
+      });
+    });
+  });
 });

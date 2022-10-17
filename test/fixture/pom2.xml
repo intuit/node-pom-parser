@@ -5,7 +5,6 @@
 		<artifactId>tynamo-parent-other</artifactId>
 		<groupId>org.other</groupId>
 		<version>2.1.4</version>
-	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.tynamo.different</groupId>
