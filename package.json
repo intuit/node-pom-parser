@@ -3,7 +3,16 @@
   "version": "1.2.0",
   "description": "A parser for the Java/Maven pom.xml files.",
   "license": "MIT",
-  "main": "lib/",
+  "source": "lib/index.js",
+  "main": "dist/index.js",
+  "umd:main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "require": "./dist/index.js",
+    "default": "./dist/index.modern.mjs"
+  },
   "contributors": [
     {
       "name": "Niti Singhal",
@@ -18,7 +27,9 @@
   ],
   "scripts": {
     "test": "nyc mocha",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "build": "microbundle",
+    "dev": "microbundle watch"
   },
   "dependencies": {
     "traverse": "^0.6.7",
@@ -27,6 +38,7 @@
   "devDependencies": {
     "chai": "^4.3.6",
     "coveralls": "^3.1.1",
+    "microbundle": "^0.15.1",
     "mocha": "^10.0.0",
     "nyc": "^15.1.0"
   },
