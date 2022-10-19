@@ -33,7 +33,6 @@
     "dev": "microbundle watch"
   },
   "dependencies": {
-    "node-pom-parser": "^0.1.1",
     "traverse": "^0.6.7",
     "xml2js": "^0.4.23"
   },

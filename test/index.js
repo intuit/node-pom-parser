@@ -1,7 +1,10 @@
 import parse from '../lib/index.js';
 import {expect} from 'chai';
 import assert from 'assert';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
 var POM_PATH = __dirname + "/fixture/pom.xml";
 
 describe('require("pom-parser")', function () {
@@ -64,11 +67,9 @@ describe('require("pom-parser")', function () {
 
   describe('when opts is empty', function(){
     it('parser should throw an error', function(){
-
-      assert.throws(function(){ parse({}, function(err, response){
-
-      }, Error);
-    })
+      assert.throws(function(){
+        parse(null, function(err, response){}, Error);
+      });
     });
   });
 
