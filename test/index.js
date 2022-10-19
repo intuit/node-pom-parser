@@ -1,6 +1,6 @@
-var pomParser = require("../lib");
-var expect = require('chai').expect;
-var assert = require('assert');
+import parse from '../lib/index.js';
+import {expect} from 'chai';
+import assert from 'assert';
 
 var POM_PATH = __dirname + "/fixture/pom.xml";
 
@@ -14,14 +14,14 @@ describe('require("pom-parser")', function () {
     // Setup the tests using mocha's promise.
     // https://lostechies.com/derickbailey/2012/08/17/asynchronous-unit-tests-with-mocha-promises-and-winjs/
     before(function(done) {
-      pomParser.parse({filePath: POM_PATH}, function(err, response) {
+      parse({filePath: POM_PATH}, function(err, response) {
         expect(err).to.be.null;
         expect(response).to.be.an("object");
-        
-        pomResponse = response;
-        pom = pomResponse.pomObject;
-        xml = pomResponse.pomXml;
-        done();
+
+	pomResponse = response;
+	pom = pomResponse.pomObject;
+	xml = pomResponse.pomXml;
+	done();
       });
     });
 
@@ -57,42 +57,19 @@ describe('require("pom-parser")', function () {
   describe('when opts is null', function(){
     it('parser should throw an error', function() {
       assert.throws(function(){
-        pomParser.parse(null, function(err, response){}, Error);
+        parse(null, function(err, response){}, Error);
       });
     });
   });
 
   describe('when opts is empty', function(){
     it('parser should throw an error', function(){
-      assert.throws(function(){ 
-        pomParser.parse({}, function(err, response){}, Error);
-      });
+
+      assert.throws(function(){ parse({}, function(err, response){
+
+      }, Error);
+    })
     });
   });
 
-  describe('error scenarios', function() {
-    it('should return error if file does not exist', function(done) {
-      pomParser.parse({ filePath: __dirname + 'incorrect-file-path' }, function(err, response) {
-        expect(response).to.be.null;
-        expect(err).to.not.be.null;
-        done();
-      });
-    });
-
-    it('should return error if invalid xml file', function(done) {
-      pomParser.parse({ filePath: __dirname + '/fixture/pom2.xml' }, function(err, response) {
-        expect(response).to.be.null;
-        expect(err).to.not.be.null;
-        done();
-      });
-    });
-
-    it('should return error if invalid xml content', function(done) {
-      const invalidXml = '<parent>this is invalid</PARENT>';
-      pomParser.parse({ xmlContent: invalidXml }, function(err) {
-        expect(err).to.not.be.null;
-        done();
-      });
-    });
-  });
 });
