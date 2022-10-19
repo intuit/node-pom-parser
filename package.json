@@ -5,13 +5,13 @@
   "license": "MIT",
   "source": "lib/index.js",
   "main": "dist/index.js",
-  "umd:main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "exports": {
     "types": "./dist/index.d.ts",
     "require": "./dist/index.js",
-    "default": "./dist/index.modern.mjs"
+    "default": "./dist/index.modern.js"
   },
   "contributors": [
     {
