@@ -4,6 +4,22 @@ const assert = require("assert");
 
 const POM_PATH = __dirname + "/fixture/pom.xml";
 
+//async functions are syntactic sugar for promises.
+//They never throw exceptions but may return rejected promise
+//Async function to handle the thrown exception from promise
+async function assertThrowsAsync(fn, regExp) {
+  let f = () => {};
+  try {
+    await fn();
+  } catch (e) {
+    f = () => {
+      throw e;
+    };
+  } finally {
+    assert.throws(f, regExp);
+  }
+}
+
 describe('require("pom-parser")', function () {
   describe("loading from files", function () {
     let pomResponse = null;
@@ -55,18 +71,20 @@ describe('require("pom-parser")', function () {
   });
 
   describe("when opts is null", function () {
-    it("parser should throw an error", function () {
-      assert.throws(function () {
-        pomParser.parse(null, function (err, response) {}, Error);
-      });
+    it("parser should throw an error", async function () {
+      await assertThrowsAsync(
+        async () => await pom.pomParser(null, function (err, response) {}),
+        /Error/
+      );
     });
   });
 
   describe("when opts is empty", function () {
-    it("parser should throw an error", function () {
-      assert.throws(function () {
-        pomParser.parse({}, function (err, response) {}, Error);
-      });
+    it("parser should throw an error", async function () {
+      await assertThrowsAsync(
+        async () => await pom.pomParser({}, function (err, response) {}),
+        /Error/
+      );
     });
   });
 
