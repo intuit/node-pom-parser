@@ -69,4 +69,36 @@ describe('require("pom-parser")', function () {
       });
     });
   });
+
+  describe("error scenarios", function () {
+    it("should return error if file does not exist", function (done) {
+      pomParser.parse(
+        { filePath: __dirname + "incorrect-file-path" },
+        function (err, response) {
+          expect(response).to.be.null;
+          expect(err).to.not.be.null;
+          done();
+        }
+      );
+    });
+
+    it("should return error if invalid xml file", function (done) {
+      pomParser.parse(
+        { filePath: __dirname + "/fixture/pom2.xml" },
+        function (err, response) {
+          expect(response).to.be.null;
+          expect(err).to.not.be.null;
+          done();
+        }
+      );
+    });
+
+    it("should return error if invalid xml content", function (done) {
+      const invalidXml = "<parent>this is invalid</PARENT>";
+      pomParser.parse({ xmlContent: invalidXml }, function (err) {
+        expect(err).to.not.be.null;
+        done();
+      });
+    });
+  });
 });
