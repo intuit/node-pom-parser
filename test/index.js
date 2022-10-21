@@ -5,7 +5,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-var POM_PATH = __dirname + "/fixture/pom.xml";
+const POM_PATH = __dirname + "/fixture/pom.xml";
 
 //async functions are syntactic sugar for promises.
 //They never throw exceptions but may return rejected promise
