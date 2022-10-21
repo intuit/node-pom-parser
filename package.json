@@ -4,9 +4,9 @@
   "description": "A parser for the Java/Maven pom.xml files.",
   "license": "MIT",
   "source": "lib/index.ts",
-  "main": "dist/index.js",
+  "main": "dist/index.umd.js",
   "umd:main": "dist/index.umd.js",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.modern.module.js",
   "type": "module",
   "types": "dist/index.d.ts",
   "exports": {
