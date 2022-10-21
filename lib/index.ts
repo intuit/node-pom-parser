@@ -1,5 +1,5 @@
 /** @module Node Pom Parser */
-
+"use strict";
 import fs from "fs";
 import xml2js, { Options } from "xml2js";
 import traverse from "traverse";
