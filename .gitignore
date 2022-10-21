@@ -27,3 +27,4 @@ npm-shrinkwrap.json
 .idea/
 package-lock.json
 yarn.lock
+dist
