@@ -1,8 +1,11 @@
-const pomParser = require("../lib");
-const expect = require("chai").expect;
-const assert = require("assert");
+import parse from "../lib/index.js";
+import { expect } from "chai";
+import assert from "assert";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
-const POM_PATH = __dirname + "/fixture/pom.xml";
+const __dirname = dirname(fileURLToPath(import.meta.url));
+var POM_PATH = __dirname + "/fixture/pom.xml";
 
 //async functions are syntactic sugar for promises.
 //They never throw exceptions but may return rejected promise
@@ -29,7 +32,7 @@ describe('require("pom-parser")', function () {
     // Setup the tests using mocha's promise.
     // https://lostechies.com/derickbailey/2012/08/17/asynchronous-unit-tests-with-mocha-promises-and-winjs/
     before(function (done) {
-      pomParser.parse({ filePath: POM_PATH }, function (err, response) {
+      parse({ filePath: POM_PATH }, function (err, response) {
         expect(err).to.be.null;
         expect(response).to.be.an("object");
 
@@ -73,7 +76,7 @@ describe('require("pom-parser")', function () {
   describe("when opts is null", function () {
     it("parser should throw an error", async function () {
       await assertThrowsAsync(
-        async () => await pom.pomParser(null, function (err, response) {}),
+        async () => await parse(null, function (err, response) {}),
         /Error/
       );
     });
@@ -82,7 +85,7 @@ describe('require("pom-parser")', function () {
   describe("when opts is empty", function () {
     it("parser should throw an error", async function () {
       await assertThrowsAsync(
-        async () => await pom.pomParser({}, function (err, response) {}),
+        async () => await parse({}, function (err, response) {}),
         /Error/
       );
     });
@@ -90,7 +93,7 @@ describe('require("pom-parser")', function () {
 
   describe("error scenarios", function () {
     it("should return error if file does not exist", function (done) {
-      pomParser.parse(
+      parse(
         { filePath: __dirname + "incorrect-file-path" },
         function (err, response) {
           expect(response).to.be.null;
@@ -101,7 +104,7 @@ describe('require("pom-parser")', function () {
     });
 
     it("should return error if invalid xml file", function (done) {
-      pomParser.parse(
+      parse(
         { filePath: __dirname + "/fixture/pom2.xml" },
         function (err, response) {
           expect(response).to.be.null;
@@ -113,7 +116,7 @@ describe('require("pom-parser")', function () {
 
     it("should return error if invalid xml content", function (done) {
       const invalidXml = "<parent>this is invalid</PARENT>";
-      pomParser.parse({ xmlContent: invalidXml }, function (err) {
+      parse({ xmlContent: invalidXml }, function (err) {
         expect(err).to.not.be.null;
         done();
       });

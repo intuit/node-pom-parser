@@ -1,5 +1,5 @@
-let pomParser = require("../lib");
-let expect = require("chai").expect;
+import parse from "../lib/index.js";
+import { expect } from "chai";
 
 let POM_CONTENT =
   '<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"' +
@@ -24,7 +24,7 @@ describe('require("pom-parser") using xml content', function () {
 
     // Setup the tests using mocha's promise.
     before(function (done) {
-      pomParser.parse({ xmlContent: POM_CONTENT }, function (err, response) {
+      parse({ xmlContent: POM_CONTENT }, function (err, response) {
         expect(err).to.be.null;
         expect(response).to.be.an("object");
 
