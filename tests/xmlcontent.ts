@@ -19,8 +19,7 @@ var POM_CONTENT = '<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi=
 describe('require("pom-parser") using xml content', function () {
 
   describe('loading from strings', function() {
-    var pomResponse = null;
-    var pom = null;
+    let pomResponse, pom ;
 
     // Setup the tests using mocha's promise.
     before(function(done) {
