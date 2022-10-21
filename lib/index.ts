@@ -1,5 +1,7 @@
 /** @module Node Pom Parser */
+
 "use strict";
+
 import fs from "fs";
 import xml2js, { Options } from "xml2js";
 import traverse from "traverse";
@@ -9,7 +11,7 @@ var XML2JS_OPTS = {
   trim: true,
   normalizeTags: true,
   normalize: true,
-  mergeAttrs: true,
+  mergeAttrs: true
 };
 
 /**
