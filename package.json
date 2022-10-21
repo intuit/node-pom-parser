@@ -27,7 +27,7 @@
     }
   ],
   "scripts": {
-    "test": "mocha --loader=ts-node/esm -r ts-node/register tests/**/*.spec.ts",
+    "test": "mocha --loader=ts-node/esm -r ts-node/register test/**/*.spec.ts",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "microbundle",
     "dev": "microbundle watch"
