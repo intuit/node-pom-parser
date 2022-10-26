@@ -3,7 +3,7 @@
 "use strict";
 
 import fs from 'fs';
-import xml2js from 'xml2js';
+import xml2js, { Options } from 'xml2js';
 import traverse from 'traverse';
 
 // xmljs options https://github.com/Leonidas-from-XIV/node-xml2js#options
@@ -13,13 +13,20 @@ var XML2JS_OPTS = {
   normalize: true,
   mergeAttrs: true
 };
+interface ParsedOutput {
+  pomXml: string;
+  pomObject: object;
+  xmlContent?: string;
+}
+type ParseOptions=(Options & { filePath?: string; xmlContent?: string }) | null
+type ParseCallback=(e: Error | null, r?: ParsedOutput | null) => void;
 
 /**
  * Parses xml into javascript object by using a file path or an xml content.
  * @param {object} opt Is the option with the filePath or xmlContent and the optional format.
  * @return {object} The pom object along with the timers.
  */
-function parse(opt, callback) {
+function parse(opt: ParseOptions,callback: ParseCallback): void {
   if (!opt) {
     throw new Error("You must provide options: opt.filePath and any other option of " +
       "https://github.com/Leonidas-from-XIV/node-xml2js#options");
@@ -31,7 +38,7 @@ function parse(opt, callback) {
 
   // If the xml content is was not provided by the api client.
   // https://github.com/petkaantonov/bluebird/blob/master/API.md#error-rejectedhandler----promise
-  if (!opt.xmlContent) {
+  if (opt.filePath) {
     readFileAsync(opt.filePath, "utf8").then(function(xmlContent) {
       return xmlContent;
 
@@ -42,9 +49,9 @@ function parse(opt, callback) {
       callback(e, null);
     });
 
-  } else {
+  } else if (opt.xmlContent) {
     // parse the xml provided by the api client.
-    _parseWithXml2js(opt.xmlContent).then(function(result) {
+     _parseWithXml2js(opt.xmlContent).then(function(result) {
       delete result.xmlContent;
       callback(null, result);
 
@@ -61,8 +68,8 @@ function parse(opt, callback) {
  * @param loadedXml {boolean} Whether the xml was loaded from the file-system.
  * @param callback {function} The callback function using Javascript PCS.
  */
-function _parseWithXml2js(xmlContent) {
-  return new Promise(function(resolve, reject) {
+function _parseWithXml2js(xmlContent: string): Promise<ParsedOutput> {
+  return new Promise(function (resolve, reject) {
     // parse the pom, erasing all
     xml2js.parseString(xmlContent, XML2JS_OPTS, function(err, pomObject) {
       if (err) {
@@ -86,7 +93,7 @@ function _parseWithXml2js(xmlContent) {
  * Removes all the arrays with single elements with a string value.
  * @param {object} o is the object to be traversed.
  */
-function removeSingleArrays(obj) {
+function removeSingleArrays(obj: Object):void {
   // Traverse all the elements of the object
   traverse(obj).forEach(function traversing(value) {
     // As the XML parser returns single fields as arrays.
@@ -96,14 +103,18 @@ function removeSingleArrays(obj) {
   });
 }
 
-function readFileAsync(path, encoding) {
-  return new Promise((resolve, reject) => fs.readFile(path, {encoding}, (err, data) => {
-    if (err) {
-      reject(err);
-    } else {
-      resolve(data);
-    }
-  }));
+function readFileAsync(path: string, encoding: BufferEncoding | undefined): Promise<string> {
+  return new Promise((resolve, reject) =>
+    fs.readFile(path, { encoding }, (err, data) => {
+      if (err) {
+        reject(err);
+      } else {
+        data instanceof Buffer
+          ? resolve(data.toString(encoding))
+          : resolve(data);
+      }
+    })
+  );
 }
 
 export default parse;

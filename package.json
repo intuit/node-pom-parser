@@ -3,10 +3,10 @@
   "version": "1.2.0",
   "description": "A parser for the Java/Maven pom.xml files.",
   "license": "MIT",
-  "source": "lib/index.js",
-  "main": "dist/index.js",
+  "source": "lib/index.ts",
+  "main": "dist/index.umd.js",
   "umd:main": "dist/index.umd.js",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.modern.module.js",
   "type": "module",
   "types": "dist/index.d.ts",
   "exports": {
@@ -27,21 +27,27 @@
     }
   ],
   "scripts": {
-    "test": "nyc mocha",
+    "test": "nyc mocha --loader=ts-node/esm -r ts-node/register test/**/*.spec.ts",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "microbundle",
     "dev": "microbundle watch"
   },
   "dependencies": {
     "traverse": "^0.6.7",
+    "typescript": "^4.8.4",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.3",
+    "@types/mocha": "^10.0.0",
+    "@types/traverse": "^0.6.32",
+    "@types/xml2js": "^0.4.11",
     "chai": "^4.3.6",
     "coveralls": "^3.1.1",
     "microbundle": "^0.15.1",
     "mocha": "^10.0.0",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "ts-node": "^10.9.1"
   },
   "repository": {
     "type": "git",
