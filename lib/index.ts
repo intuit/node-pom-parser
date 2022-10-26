@@ -16,6 +16,7 @@ var XML2JS_OPTS = {
 interface ParsedOutput {
   pomXml: string;
   pomObject: object;
+  xmlContent?: string;
 }
 type ParseOptions=(Options & { filePath?: string; xmlContent?: string }) | null
 type ParseCallback=(e: Error | null, r?: ParsedOutput | null) => void;
@@ -25,7 +26,7 @@ type ParseCallback=(e: Error | null, r?: ParsedOutput | null) => void;
  * @param {object} opt Is the option with the filePath or xmlContent and the optional format.
  * @return {object} The pom object along with the timers.
  */
-function parse(opt: ParseOptions,callback: ParseCallback) {
+function parse(opt: ParseOptions,callback: ParseCallback): void {
   if (!opt) {
     throw new Error("You must provide options: opt.filePath and any other option of " +
       "https://github.com/Leonidas-from-XIV/node-xml2js#options");
@@ -51,6 +52,7 @@ function parse(opt: ParseOptions,callback: ParseCallback) {
   } else if (opt.xmlContent) {
     // parse the xml provided by the api client.
      _parseWithXml2js(opt.xmlContent).then(function(result) {
+      delete result.xmlContent;
       callback(null, result);
 
     }).catch(function (e) {
@@ -91,7 +93,7 @@ function _parseWithXml2js(xmlContent: string): Promise<ParsedOutput> {
  * Removes all the arrays with single elements with a string value.
  * @param {object} o is the object to be traversed.
  */
-function removeSingleArrays(obj: Object) {
+function removeSingleArrays(obj: Object):void {
   // Traverse all the elements of the object
   traverse(obj).forEach(function traversing(value) {
     // As the XML parser returns single fields as arrays.
