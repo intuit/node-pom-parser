@@ -2,9 +2,9 @@
 
 "use strict";
 
-import fs from "fs";
-import xml2js, { Options } from "xml2js";
-import traverse from "traverse";
+import fs from 'fs';
+import xml2js, { Options } from 'xml2js';
+import traverse from 'traverse';
 
 // xmljs options https://github.com/Leonidas-from-XIV/node-xml2js#options
 var XML2JS_OPTS = {
@@ -30,14 +30,13 @@ function parse(
   ) => void
 ) {
   if (!opt) {
-    throw new Error(
-      "You must provide options: opt.filePath and any other option of " +
-        "https://github.com/Leonidas-from-XIV/node-xml2js#options"
-    );
+    throw new Error("You must provide options: opt.filePath and any other option of " +
+      "https://github.com/Leonidas-from-XIV/node-xml2js#options");
   }
   if (!opt.xmlContent && !opt.filePath) {
     throw new Error("You must provide the opt.filePath or the opt.xmlContent");
   }
+
 
   // If the xml content is was not provided by the api client.
   // https://github.com/petkaantonov/bluebird/blob/master/API.md#error-rejectedhandler----promise
@@ -55,15 +54,15 @@ function parse(
       });
   } else if (opt.xmlContent) {
     // parse the xml provided by the api client.
-    _parseWithXml2js(opt.xmlContent)
-      .then(function (result) {
-        callback(null, result);
-      })
-      .catch(function (e) {
-        callback(e);
-      });
+     _parseWithXml2js(opt.xmlContent).then(function(result) {
+      callback(null, result);
+
+    }).catch(function (e) {
+      callback(e);
+    });
   }
-}
+
+};
 
 /**
  * Parses the given xml content.
@@ -77,7 +76,7 @@ function _parseWithXml2js(xmlContent: string): Promise<{
 }> {
   return new Promise(function (resolve, reject) {
     // parse the pom, erasing all
-    xml2js.parseString(xmlContent, XML2JS_OPTS, function (err, pomObject) {
+    xml2js.parseString(xmlContent, XML2JS_OPTS, function(err, pomObject) {
       if (err) {
         // Reject with the error
         reject(err);
