@@ -79,7 +79,7 @@ function _parseWithXml2js(xmlContent: string): Promise<{
       // Response to the call
       resolve({
         pomXml: xmlContent, // Only add the pomXml when loaded from the file-system.
-        pomObject: pomObject, // Always add the object
+        pomObject: pomObject // Always add the object
       });
     });
   });
@@ -99,10 +99,7 @@ function removeSingleArrays(obj: Object) {
   });
 }
 
-function readFileAsync(
-  path: string,
-  encoding: BufferEncoding | undefined
-): Promise<string> {
+function readFileAsync(path: string, encoding: BufferEncoding | undefined): Promise<string> {
   return new Promise((resolve, reject) =>
     fs.readFile(path, { encoding }, (err, data) => {
       if (err) {
