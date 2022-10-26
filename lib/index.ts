@@ -13,8 +13,13 @@ var XML2JS_OPTS = {
   normalize: true,
   mergeAttrs: true
 };
+interface ParsedOutput {
+  pomXml: string;
+  pomObject: object;
+}
 type ParseOptions=(Options & { filePath?: string; xmlContent?: string }) | null
-type ParseCallback=(e: Error | null,r?: {pomXml: string;pomObject: object;} | null) => void
+type ParseCallback=(e: Error | null, r?: ParsedOutput | null) => void;
+
 /**
  * Parses xml into javascript object by using a file path or an xml content.
  * @param {object} opt Is the option with the filePath or xmlContent and the optional format.
@@ -61,10 +66,7 @@ function parse(opt: ParseOptions,callback: ParseCallback) {
  * @param loadedXml {boolean} Whether the xml was loaded from the file-system.
  * @param callback {function} The callback function using Javascript PCS.
  */
-function _parseWithXml2js(xmlContent: string): Promise<{
-  pomXml: string;
-  pomObject: object;
-}> {
+function _parseWithXml2js(xmlContent: string): Promise<ParsedOutput> {
   return new Promise(function (resolve, reject) {
     // parse the pom, erasing all
     xml2js.parseString(xmlContent, XML2JS_OPTS, function(err, pomObject) {
