@@ -13,22 +13,14 @@ var XML2JS_OPTS = {
   normalize: true,
   mergeAttrs: true
 };
-
+type ParseOptions=(Options & { filePath?: string; xmlContent?: string }) | null
+type ParseCallback=(e: Error | null,r?: {pomXml: string;pomObject: object;} | null) => void
 /**
  * Parses xml into javascript object by using a file path or an xml content.
  * @param {object} opt Is the option with the filePath or xmlContent and the optional format.
  * @return {object} The pom object along with the timers.
  */
-function parse(
-  opt: (Options & { filePath?: string; xmlContent?: string }) | null,
-  callback: (
-    e: Error | null,
-    r?: {
-      pomXml: string;
-      pomObject: object;
-    } | null
-  ) => void
-) {
+function parse(opt: ParseOptions,callback: ParseCallback) {
   if (!opt) {
     throw new Error("You must provide options: opt.filePath and any other option of " +
       "https://github.com/Leonidas-from-XIV/node-xml2js#options");
