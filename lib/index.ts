@@ -42,15 +42,14 @@ function parse(
   // https://github.com/petkaantonov/bluebird/blob/master/API.md#error-rejectedhandler----promise
   if (opt.filePath) {
     readFileAsync(opt.filePath, "utf8").then(function(xmlContent) {
-        return xmlContent;
+      return xmlContent;
 
-      })
-      .then(_parseWithXml2js).then(function (result) {
-        callback(null, result);
+    }).then(_parseWithXml2js).then(function(result) {
+      callback(null, result);
 
-      }).catch(function (e) {
-        callback(e, null);
-      });
+    }).catch(function(e) {
+      callback(e, null);
+    });
 
   } else if (opt.xmlContent) {
     // parse the xml provided by the api client.
