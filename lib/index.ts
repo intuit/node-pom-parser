@@ -75,8 +75,7 @@ function parse(opt: ParseOptions, callback: ParseCallback): void {
       callback(null, result);
     }).catch(function (e) {
       callback(e, null);
-    });
-
+    }
   } else if (opt.xmlContent) {
     // parse the xml provided by the api client.
     _parseWithXml2js(opt.xmlContent).then(function (result) {
@@ -85,7 +84,7 @@ function parse(opt: ParseOptions, callback: ParseCallback): void {
 
     }).catch(function (e) {
       callback(e);
-    });
+    }
   }
 
 };
@@ -96,25 +95,18 @@ function parse(opt: ParseOptions, callback: ParseCallback): void {
  * @param loadedXml {boolean} Whether the xml was loaded from the file-system.
  * @param callback {function} The callback function using Javascript PCS.
  */
-function _parseWithXml2js(xmlContent: string): Promise<ParsedOutput> {
-  return new Promise(function (resolve, reject) {
-    // parse the pom, erasing all
-    xml2js.parseString(xmlContent, XML2JS_OPTS, function (err, pomObject) {
-      if (err) {
-        // Reject with the error
-        reject(err);
-      }
+ async function _parseWithXml2js(xmlContent: string) {
+  // parse the pom, erasing all
+  const pomObject = await xml2js.parseStringPromise(xmlContent, XML2JS_OPTS);
 
-      // Replace the arrays with single elements with strings
-      removeSingleArrays(pomObject);
+  // Replace the arrays with single elements with strings
+  removeSingleArrays(pomObject);
 
-      // Response to the call
-      resolve({
-        pomXml: xmlContent, // Only add the pomXml when loaded from the file-system.
-        pomObject: pomObject // Always add the object
-      });
-    });
-  });
+  // Response to the call
+  return {
+    pomXml: xmlContent, // Only add the pomXml when loaded from the file-system.
+    pomObject: pomObject, // Always add the object
+  };
 }
 
 /**
@@ -131,18 +123,9 @@ function removeSingleArrays(obj: Object): void {
   });
 }
 
-function readFileAsync(path: string, encoding: BufferEncoding | undefined): Promise<string> {
-  return new Promise((resolve, reject) =>
-    fs.readFile(path, { encoding }, (err, data) => {
-      if (err) {
-        reject(err);
-      } else {
-        data instanceof Buffer
-          ? resolve(data.toString(encoding))
-          : resolve(data);
-      }
-    })
-  );
+async function readFileAsync(path: string, encoding: BufferEncoding | undefined) {
+  let data =  await fs.promises.readFile(path, { encoding });
+  return data instanceof Buffer ? data.toString(encoding) : data
 }
 
 export default parse;

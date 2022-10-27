@@ -58,18 +58,22 @@ describe('require("pom-parser")', function () {
   });
 
   describe("when opts is null", function () {
-    it("parser should throw an error", function () {
-      assert.throws(function () {
-        parse(null, function (err, response) { });
-      });
+    it("parser should throw an error", async function () {
+      try {
+        await parse(null, (err, result) => {});
+      } catch(e) {
+        expect(e).to.not.be.undefined;
+      }
     });
   });
 
   describe("when opts is empty", function () {
-    it("parser should throw an error", function () {
-      assert.throws(function () {
-        parse({}, function (err, response) { });
-      });
+    it("parser should throw an error", async function () {
+      try {
+        await parse({}, (err, result) => {});
+      } catch(e) {
+        expect(e).to.not.be.undefined;
+      }
     });
   });
 
