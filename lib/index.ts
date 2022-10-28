@@ -23,8 +23,8 @@ type ParseCallback=(e: Error | null, r?: ParsedOutput | null) => void;
 
 /**
  * Parses xml into javascript object by using a file path or an xml content.
- * @param {object} opt Is the option with the filePath or xmlContent and the optional format.
- * @return {object} The pom object along with the timers.
+ * @param {*} opt Is the option with the filePath or xmlContent and the optional format.
+ * @param {*} callback The pom object along with the timers.
  */
 function parse(opt: ParseOptions,callback: ParseCallback): void {
   if (!opt) {
@@ -65,8 +65,6 @@ function parse(opt: ParseOptions,callback: ParseCallback): void {
 /**
  * Parses the given xml content.
  * @param xmlContent {string} Is the xml content in string using utf-8 format.
- * @param loadedXml {boolean} Whether the xml was loaded from the file-system.
- * @param callback {function} The callback function using Javascript PCS.
  */
 function _parseWithXml2js(xmlContent: string): Promise<ParsedOutput> {
   return new Promise(function (resolve, reject) {
@@ -103,6 +101,12 @@ function removeSingleArrays(obj: Object):void {
   });
 }
 
+/**
+ * Reads a file in Async mode
+ * @param {*} path is the file path
+ * @param {*} encoding is the type on encoding used in the file
+ * @returns 
+ */
 function readFileAsync(path: string, encoding: BufferEncoding | undefined): Promise<string> {
   return new Promise((resolve, reject) =>
     fs.readFile(path, { encoding }, (err, data) => {
