@@ -1,11 +1,13 @@
 import parse from "../lib/index.js";
 import { expect } from "chai";
 import assert from "assert";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const POM_PATH = __dirname + "/fixture/pom.xml";
+// read the current working directory, where
+// package.json file lives
+const __dirname = process.cwd();
+
+// form path to test fixtures
+const POM_PATH = __dirname + "/test/fixture/pom.xml";
 
 describe('require("pom-parser")', function () {
   describe("loading from files", function () {
@@ -58,7 +60,7 @@ describe('require("pom-parser")', function () {
   describe("when opts is null", function () {
     it("parser should throw an error", function () {
       assert.throws(function () {
-        parse(null, function (err, response) {});
+        parse(null, function (err, response) { });
       });
     });
   });
@@ -66,7 +68,7 @@ describe('require("pom-parser")', function () {
   describe("when opts is empty", function () {
     it("parser should throw an error", function () {
       assert.throws(function () {
-        parse({}, function (err, response) {});
+        parse({}, function (err, response) { });
       });
     });
   });
