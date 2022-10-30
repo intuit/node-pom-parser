@@ -1,11 +1,9 @@
 import parse from "../lib/index.js";
 import { expect } from "chai";
 import assert from "assert";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const POM_PATH = __dirname + "/fixture/pom.xml";
+const __dirname = process.cwd();
+const POM_PATH = __dirname + "/test/fixture/pom.xml";
 
 describe('require("pom-parser")', function () {
   describe("loading from files", function () {
