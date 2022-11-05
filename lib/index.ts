@@ -18,7 +18,7 @@ interface ParsedOutput {
   xmlContent?: string;
 }
 
-type ParseOptions = (Options & { filePath?: string; xmlContent?: string }) | null
+type ParseOptions = ({ filePath?: string; xmlContent?: string, xmlOptions?: Options }) | null
 
 type ParseCallback = (e: Error | null, r?: ParsedOutput | null) => void;
 
@@ -40,13 +40,15 @@ export async function parseAsync(opt: ParseOptions): Promise<ParsedOutput> {
     throw new Error("You must provide the opt.filePath or the opt.xmlContent");
   }
 
+  const xmlOptions = opt.xmlOptions ?? XML2JS_OPTS;
+
   if (opt.filePath) {
     const xmlContent = await readFileAsync(opt.filePath, "utf8")
-    const result = await _parseWithXml2js(xmlContent);
+    const result = await _parseWithXml2js(xmlContent, xmlOptions);
     return result;
   }
 
-  const result = await _parseWithXml2js(opt.xmlContent || '');
+  const result = await _parseWithXml2js(opt.xmlContent || '', xmlOptions);
   delete result.xmlContent;
   return result;
 }
@@ -65,13 +67,16 @@ function parse(opt: ParseOptions, callback: ParseCallback): void {
     throw new Error("You must provide the opt.filePath or the opt.xmlContent");
   }
 
+  const xmlOptions = opt.xmlOptions ?? XML2JS_OPTS;
+
   // If the xml content is was not provided by the api client.
   // https://github.com/petkaantonov/bluebird/blob/master/API.md#error-rejectedhandler----promise
   if (opt.filePath) {
     readFileAsync(opt.filePath, "utf8").then(function (xmlContent) {
       return xmlContent;
-
-    }).then(_parseWithXml2js).then(function (result) {
+    }).then(function (content) {
+      return _parseWithXml2js(content, xmlOptions);
+    }).then(function (result) {
       callback(null, result);
     }).catch(function (e) {
       callback(e, null);
@@ -79,7 +84,7 @@ function parse(opt: ParseOptions, callback: ParseCallback): void {
 
   } else if (opt.xmlContent) {
     // parse the xml provided by the api client.
-    _parseWithXml2js(opt.xmlContent).then(function (result) {
+    _parseWithXml2js(opt.xmlContent, xmlOptions).then(function (result) {
       delete result.xmlContent;
       callback(null, result);
 
@@ -93,13 +98,14 @@ function parse(opt: ParseOptions, callback: ParseCallback): void {
 /**
  * Parses the given xml content.
  * @param xmlContent {string} Is the xml content in string using utf-8 format.
+ * @param xmlOptions {Options} Are the XML2JS options passed to the parser.
  * @param loadedXml {boolean} Whether the xml was loaded from the file-system.
  * @param callback {function} The callback function using Javascript PCS.
  */
-function _parseWithXml2js(xmlContent: string): Promise<ParsedOutput> {
+function _parseWithXml2js(xmlContent: string, xmlOptions: Options): Promise<ParsedOutput> {
   return new Promise(function (resolve, reject) {
     // parse the pom, erasing all
-    xml2js.parseString(xmlContent, XML2JS_OPTS, function (err, pomObject) {
+    xml2js.parseString(xmlContent, xmlOptions, function (err, pomObject) {
       if (err) {
         // Reject with the error
         reject(err);
