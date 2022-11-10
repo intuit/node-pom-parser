@@ -1,6 +1,5 @@
 import parse from "../lib/index.js";
 import { expect } from "chai";
-import assert from "assert";
 
 // read the current working directory, where
 // package.json file lives
