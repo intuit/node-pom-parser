@@ -95,7 +95,7 @@ function parse(opt: ParseOptions, callback: ParseCallback): void {
  * @param loadedXml {boolean} Whether the xml was loaded from the file-system.
  * @param callback {function} The callback function using Javascript PCS.
  */
- async function _parseWithXml2js(xmlContent: string) {
+ async function _parseWithXml2js(xmlContent: string): Promise<ParsedOutput> {
   // parse the pom, erasing all
   const pomObject = await xml2js.parseStringPromise(xmlContent, XML2JS_OPTS);
 
@@ -123,8 +123,8 @@ function removeSingleArrays(obj: Object): void {
   });
 }
 
-async function readFileAsync(path: string, encoding: BufferEncoding | undefined) {
-  let data =  await fs.promises.readFile(path, { encoding });
+async function readFileAsync(path: string, encoding: BufferEncoding | undefined): Promise<string> {
+  let data: string | Buffer =  await fs.promises.readFile(path, { encoding });
   return data instanceof Buffer ? data.toString(encoding) : data
 }
 
