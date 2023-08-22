@@ -34,18 +34,18 @@
   },
   "dependencies": {
     "traverse": "^0.6.7",
-    "typescript": "^4.8.4",
-    "xml2js": "^0.6.0"
+    "typescript": "^5.1.6",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.3",
-    "@types/mocha": "^10.0.0",
+    "@types/chai": "^4.3.5",
+    "@types/mocha": "^10.0.1",
     "@types/traverse": "^0.6.32",
     "@types/xml2js": "^0.4.11",
-    "chai": "^4.3.6",
+    "chai": "^4.3.7",
     "coveralls": "^3.1.1",
     "microbundle": "^0.15.1",
-    "mocha": "^10.0.0",
+    "mocha": "^10.2.0",
     "nyc": "^15.1.0",
     "ts-node": "^10.9.1"
   },
