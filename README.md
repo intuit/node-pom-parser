@@ -25,7 +25,7 @@ Parsing Java's `pom.xml` file and properly returning the JSON object, including 
 * All XML elements are placed into properties
 * All XML element attributes are merged into the parent element
 * Both the XML string and the parsed object are returned
-* You can provide parsing options
+* You can provide parsing options including XML to JS options
 
 # Contributing
 
@@ -53,7 +53,6 @@ import parse from './lib/index.js';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
-//var pomParser = require("./lib/index");
 // The required options, including the filePath.
 // Other parsing options from https://github.com/Leonidas-from-XIV/node-xml2js#options
 
@@ -61,6 +60,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 var opts = {
   filePath: __dirname + "/test/fixture/pom.xml", // The path to a pom file
+  // xmlContent?: string, => XML content instead of path to xml file
+  // xmlOptions?: Options, => XML to JS converter options
 };
 // Parse the pom based on a path
 parse(opts, function(err, pomResponse) {
