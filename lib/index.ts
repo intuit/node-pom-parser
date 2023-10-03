@@ -53,8 +53,9 @@ export async function parseAsync(opt: ParseOptions): Promise<ParsedOutput> {
 
 /**
  * Parses xml into javascript object by using a file path or an xml content.
- * @param {object} opt Is the option with the filePath or xmlContent and the optional format.
- * @return {object} The pom object along with the timers.
+ * @param {ParseOptions} opt Is the option with the filePath or xmlContent and the optional format.
+ * @param {ParseCallback} callback The callback function
+ * @return {void}
  */
 function parse(opt: ParseOptions, callback: ParseCallback): void {
   if (!opt) {
@@ -87,14 +88,12 @@ function parse(opt: ParseOptions, callback: ParseCallback): void {
       callback(e);
     });
   }
-
-};
+}
 
 /**
  * Parses the given xml content.
  * @param xmlContent {string} Is the xml content in string using utf-8 format.
- * @param loadedXml {boolean} Whether the xml was loaded from the file-system.
- * @param callback {function} The callback function using Javascript PCS.
+ * @returns {Promise<ParsedOutput>} a `Promise` that holds the parsed output
  */
 function _parseWithXml2js(xmlContent: string): Promise<ParsedOutput> {
   return new Promise(function (resolve, reject) {
@@ -119,7 +118,8 @@ function _parseWithXml2js(xmlContent: string): Promise<ParsedOutput> {
 
 /**
  * Removes all the arrays with single elements with a string value.
- * @param {object} o is the object to be traversed.
+ * @param {object} obj is the object to be traversed.
+ * @return {void}
  */
 function removeSingleArrays(obj: Object): void {
   // Traverse all the elements of the object
@@ -131,6 +131,12 @@ function removeSingleArrays(obj: Object): void {
   });
 }
 
+/**
+ * Reads a file asynchronously.
+ * @param {string} path The path to the file.
+ * @param {BufferEncoding|undefined} encoding the encoding to be used.
+ * @Returns {Promise<string>} a `Promise` that holds the file content.
+ */
 function readFileAsync(path: string, encoding: BufferEncoding | undefined): Promise<string> {
   return new Promise((resolve, reject) =>
     fs.readFile(path, { encoding }, (err, data) => {
